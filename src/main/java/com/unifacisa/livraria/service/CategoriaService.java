@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.unifacisa.livraria.entity.Autor;
 import com.unifacisa.livraria.entity.Categoria;
 import com.unifacisa.livraria.repository.CategoriaRepository;
 
@@ -19,7 +20,13 @@ public class CategoriaService {
 	}
 
 	public Categoria salvar(Categoria categoria) {
-		return categoriaRepository.save(categoria);
+	    // Para cada autor associado à categoria, sincronize o relacionamento
+	    if (categoria.getAutores() != null) {
+	        for (Autor autor : categoria.getAutores()) {
+	            autor.getCategorias().add(categoria); // Atualiza o lado do Autor
+	        }
+	    }
+	    return categoriaRepository.save(categoria); // Salva no banco
 	}
 
 	public void deletar(Long id) {

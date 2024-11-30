@@ -2,7 +2,7 @@ package com.unifacisa.livraria.entity;
 
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,13 +13,14 @@ import jakarta.persistence.ManyToMany;
 public class Categoria {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String nome;
 	
+	@JsonBackReference
+	@ManyToMany(mappedBy = "categorias") 
 	
-	@ManyToMany(mappedBy = "categorias", cascade = CascadeType.ALL)
 	private Set<Autor> autores;
 
 	public Long getId() {
@@ -37,5 +38,15 @@ public class Categoria {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public Set<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(Set<Autor> autores) {
+		this.autores = autores;
+	}
+	
+	
 
 }

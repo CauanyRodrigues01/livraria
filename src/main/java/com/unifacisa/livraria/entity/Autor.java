@@ -1,8 +1,10 @@
 package com.unifacisa.livraria.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,17 +17,18 @@ import jakarta.persistence.ManyToMany;
 public class Autor {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String nome;
 
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "autor_categoria",
-	joinColumns = @JoinColumn(name = "autor_id"),
-	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-	private Set<Categoria> categorias;
+	           joinColumns = @JoinColumn(name = "autor_id"),
+	           inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	@JsonManagedReference
+	private Set<Categoria> categorias = new HashSet<>();
 	
 	public Long getId() {
 		return id;
@@ -41,6 +44,14 @@ public class Autor {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Set<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Set<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 	
 	
