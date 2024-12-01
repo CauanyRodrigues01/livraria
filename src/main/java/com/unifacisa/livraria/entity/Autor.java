@@ -1,7 +1,6 @@
 package com.unifacisa.livraria.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,12 +19,13 @@ public class Autor {
 	
 	private String nome;
 
-	
 	@ManyToMany
-	@JoinTable(name = "autor_categoria",
-	           joinColumns = @JoinColumn(name = "autor_id"),
-	           inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-	private Set<Categoria> categorias = new HashSet<>();
+	@JoinTable(
+			name = "autor_categoria", 
+			joinColumns = @JoinColumn(name = "autor_id"), 
+			inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	)
+	private List<Categoria> categorias;
 	
 	public Long getId() {
 		return id;
@@ -43,11 +43,11 @@ public class Autor {
 		this.nome = nome;
 	}
 
-	public Set<Categoria> getCategorias() {
+	public List<Categoria> getCategorias() {
 		return categorias;
 	}
 
-	public void setCategorias(Set<Categoria> categorias) {
+	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
 	

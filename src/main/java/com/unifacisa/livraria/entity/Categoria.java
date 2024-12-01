@@ -1,7 +1,8 @@
 package com.unifacisa.livraria.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,8 @@ public class Categoria {
 	
 	
 	@ManyToMany(mappedBy = "categorias")
-	private Set<Autor> autores = new HashSet<>();
+	@JsonIgnore  // Ignora a serialização da lista de autores
+	private List<Autor> autores;
 
 	public Long getId() {
 		return id;
@@ -38,11 +40,11 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	public Set<Autor> getAutores() {
+	public List<Autor> getAutores() {
 		return autores;
 	}
 
-	public void setAutores(Set<Autor> autores) {
+	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
 	
