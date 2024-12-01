@@ -3,8 +3,6 @@ package com.unifacisa.livraria.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +25,6 @@ public class Autor {
 	@JoinTable(name = "autor_categoria",
 	           joinColumns = @JoinColumn(name = "autor_id"),
 	           inverseJoinColumns = @JoinColumn(name = "categoria_id"))
-	@JsonManagedReference
 	private Set<Categoria> categorias = new HashSet<>();
 	
 	public Long getId() {
@@ -54,6 +51,4 @@ public class Autor {
 		this.categorias = categorias;
 	}
 	
-	
-
 }
