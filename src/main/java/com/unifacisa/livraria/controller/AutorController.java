@@ -17,23 +17,22 @@ import com.unifacisa.livraria.service.AutorService;
 @RestController
 @RequestMapping("/autores")
 public class AutorController {
-	
-	@Autowired
-	 private AutorService autorService;
 
-	    @GetMapping
-	    public List<Autor> listarTodos() {
-	        return autorService.listarTodos();
-	    }
+    @Autowired
+    private AutorService autorService;
 
-	    @PostMapping
-	    public Autor salvar(@RequestBody Autor autor) {
-	        return autorService.salvar(autor);
-	    }
-	   
-	    @DeleteMapping("/{id}")
-	    public void deletarAutor(@PathVariable Long id) {
-	    	autorService.deletar(id);
-	    }
+    @GetMapping
+    public List<Autor> listarTodos() {
+        return autorService.listarTodos();
+    }
 
+    @PostMapping
+    public Autor salvar(@RequestBody Autor autor) {
+        return autorService.salvar(autor);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarAutor(@PathVariable Long id) {
+        autorService.deletar(id);
+    }
 }
