@@ -9,18 +9,22 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Livro {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
     private String titulo;
     
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "autor_id", referencedColumnName = "id")
+    private Autor autor;
 
-	public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -43,4 +47,12 @@ public class Livro {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
 }
