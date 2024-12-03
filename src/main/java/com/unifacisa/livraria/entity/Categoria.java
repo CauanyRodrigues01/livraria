@@ -2,21 +2,15 @@ package com.unifacisa.livraria.entity;
 
 import java.util.List;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import jakarta.persistence.ManyToMany;
-
 import jakarta.persistence.OneToMany;
-
 
 @Entity
 public class Categoria {
@@ -26,8 +20,6 @@ public class Categoria {
 	private Long id;
 
 	private String nome;
-	
-
 	
 	@ManyToMany(mappedBy = "categorias")
 	@JsonIgnore  // Ignora a serialização da lista de autores
@@ -61,7 +53,13 @@ public class Categoria {
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
-	
-	
+
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
+	}
 
 }
