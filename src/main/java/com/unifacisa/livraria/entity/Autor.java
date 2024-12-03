@@ -3,6 +3,8 @@ package com.unifacisa.livraria.entity;
 import java.util.List;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +34,7 @@ public class Autor {
 	private List<Categoria> categorias;
 
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Livro> livros;
 
 
