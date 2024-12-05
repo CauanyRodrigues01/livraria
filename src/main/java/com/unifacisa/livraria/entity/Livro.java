@@ -13,6 +13,10 @@ public class Livro {
     private Long id;
     private String titulo;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "descricao_id")
+    private Descricao descricao;
+
     public Long getId() {
         return id;
     }
